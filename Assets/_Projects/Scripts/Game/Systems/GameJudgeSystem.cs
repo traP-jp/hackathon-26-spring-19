@@ -23,4 +23,15 @@ public class GameJudgeSystem
 
         return gameData.remainingTime <= 0f && gameData.currentLife > 0;
     }
+
+    public bool IsFinished(GameData gameData)
+    {
+        if (gameData == null)
+        {
+            // エラー処理
+            throw new ArgumentNullException(nameof(gameData));
+        }
+
+        return IsGameOver(gameData) || IsClear(gameData);
+    }
 }

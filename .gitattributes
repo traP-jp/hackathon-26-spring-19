@@ -7,3 +7,5 @@
 *.ogg filter=lfs diff=lfs merge=lfs -text
 *.mp4 filter=lfs diff=lfs merge=lfs -text
 *.fbx filter=lfs diff=lfs merge=lfs -text
+
+Assets/Plugins/Demigiant/** linguist-vendored

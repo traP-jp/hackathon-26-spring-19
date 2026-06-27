@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class GameData : MonoBehaviour
 {
-    GamePhase phase;
+    public GamePhase phase;
     public DifficultyParam difficulty;
     public float timeLimit;
     public float remainingTime;

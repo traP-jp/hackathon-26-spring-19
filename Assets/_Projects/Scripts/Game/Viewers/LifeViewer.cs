@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-public class NewMonoBehaviourScript : MonoBehaviour
+public class LifeViewer : MonoBehaviour
 {
     Transform lifeIconParent;
     GameObject lifeIconPrefab;

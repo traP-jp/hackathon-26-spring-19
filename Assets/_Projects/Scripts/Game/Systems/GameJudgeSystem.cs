@@ -54,4 +54,27 @@ public class GameJudgeSystem
             return ResultType.Clear;
         }
     }
+
+    public void ApplyResult(GameData gameData, ResultType resultType)
+    {
+        if (gameData == null)
+        {
+            // エラー処理
+            throw new ArgumentNullException(nameof(gameData));
+        }
+
+        gameData.resultType = resultType;
+        gameData.phase = GamePhase.Finished;
+
+        // 負の値を取らないようにする
+        if (gameData.remainingTime < 0f)
+        {
+            gameData.remainingTime = 0f;
+        }
+
+        if (gameData.currentLife < 0)
+        {
+            gameData.currentLife = 0;
+        }
+    }
 }

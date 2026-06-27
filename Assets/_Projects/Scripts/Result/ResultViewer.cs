@@ -1,6 +1,5 @@
 using UnityEngine;
 using TMPro;
-using VContainer;
 
 public class ResultViewer : MonoBehaviour
 {
@@ -10,22 +9,7 @@ public class ResultViewer : MonoBehaviour
     [SerializeField] private TextMeshProUGUI remainingLifeText;
     [SerializeField] private TextMeshProUGUI finalScoreText;
 
-    private ItemCountViewer itemCountViewer;
-    private ResultData resultData;
-    private DifficultyParam[] difficultyParams;
-
-    [Inject]
-    public void Construct(ItemCountViewer itemCountViewer, ResultData resultData, DifficultyParam[] difficultyParams)
-    {
-        this.itemCountViewer = itemCountViewer;
-        this.resultData = resultData;
-        this.difficultyParams = difficultyParams;
-    }
-
-    private void Start()
-    {
-        Show(resultData);
-    }
+    [SerializeField] private ItemCountViewer itemCountViewer;
 
     public void Show(ResultData data)
     {
@@ -36,11 +20,14 @@ public class ResultViewer : MonoBehaviour
         }
 
         SetResultText(data.resultType);
-        SetText(difficultyText, GetDifficultyName(data.difficultyType));
+        SetText(difficultyText, data.difficultyType.ToString());
         SetText(survivalTimeText, FormatTime(data.survivalTime));
         SetText(remainingLifeText, Mathf.Max(0, data.remainingLife).ToString());
         SetText(finalScoreText, data.finalScore.ToString());
-        itemCountViewer?.SetItemCounts(data.itemCountData);
+        if (itemCountViewer != null)
+        {
+            itemCountViewer.SetItemCounts(data.itemCountData);
+        }
     }
 
     public void SetResultText(ResultType resultType)
@@ -48,17 +35,17 @@ public class ResultViewer : MonoBehaviour
         SetText(resultText, resultType == ResultType.Clear ? "CLEAR" : "GAME OVER");
     }
 
-    private string GetDifficultyName(DifficultyType difficultyType)
+    public void Clear()
     {
-        if (difficultyParams != null)
+        SetText(resultText, string.Empty);
+        SetText(difficultyText, string.Empty);
+        SetText(survivalTimeText, string.Empty);
+        SetText(remainingLifeText, string.Empty);
+        SetText(finalScoreText, string.Empty);
+        if (itemCountViewer != null)
         {
-            foreach (DifficultyParam difficulty in difficultyParams)
-            {
-                if (difficulty != null && difficulty.difficultyType == difficultyType) return difficulty.displayName;
-            }
+            itemCountViewer.SetItemCounts(null);
         }
-
-        return difficultyType.ToString();
     }
 
     private static string FormatTime(float seconds)
@@ -67,18 +54,13 @@ public class ResultViewer : MonoBehaviour
         return $"{totalSeconds / 60:00}:{totalSeconds % 60:00}";
     }
 
-    private void Clear()
-    {
-        SetText(resultText, string.Empty);
-        SetText(difficultyText, string.Empty);
-        SetText(survivalTimeText, string.Empty);
-        SetText(remainingLifeText, string.Empty);
-        SetText(finalScoreText, string.Empty);
-        itemCountViewer?.SetItemCounts(null);
-    }
-
     private static void SetText(TextMeshProUGUI target, string value)
     {
-        if (target != null) target.text = value;
+        if (target == null)
+        {
+            return;
+        }
+
+        target.text = value;
     }
 }

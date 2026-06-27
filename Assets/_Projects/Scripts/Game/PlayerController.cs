@@ -4,8 +4,8 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     Rigidbody2D _rb;
-    [SerializeField] float moveSpeed  = 3f;
-    [SerializeField] float mulitdash = 2f;
+    [SerializeField] float moveSpeed;
+    [SerializeField] float mulitdash;
     float _xInput;
     bool _isDash;
 
@@ -21,12 +21,15 @@ public class PlayerController : MonoBehaviour
     public void Update()
     {
         float xVelocity = _xInput * moveSpeed;
-
         if (_isDash)
         {
             xVelocity *= mulitdash;
         }
         _rb.linearVelocityX = xVelocity;
+
+        var p = _rb.position;
+        p.x = Mathf.Clamp(p.x, minX, maxX);
+        _rb.position = p;
     }
 
     public void Move(InputAction.CallbackContext context)

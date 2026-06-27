@@ -1,0 +1,4 @@
+enum ResultType {
+    Clear,
+    GameOver
+}

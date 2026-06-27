@@ -9,7 +9,13 @@ public sealed class GameScope : LifetimeScope
     protected override void Configure(IContainerBuilder builder)
     {
         builder.RegisterComponentInHierarchy<GameData>();
-        builder.RegisterComponentInHierarchy<GameUIViewer>();
         builder.RegisterComponentInHierarchy<PauseInfo>();
+
+        builder.RegisterComponentInHierarchy<LifeViewer>();
+        builder.RegisterComponentInHierarchy<TimerViewer>();
+        builder.RegisterComponentInHierarchy<ScoreViewer>();
+        builder.RegisterComponentInHierarchy<DifficultyViewer>();
+        builder.RegisterComponentInHierarchy<ItemCountViewer>();
+        builder.RegisterComponentInHierarchy<GameUIViewer>();
     }
 }

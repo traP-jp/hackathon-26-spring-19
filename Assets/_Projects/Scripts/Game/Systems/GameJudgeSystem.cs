@@ -6,11 +6,21 @@ public class GameJudgeSystem
     {
         if (gameDate == null)
         {
-            // エラー時の処理
+            // エラー処理
             throw new ArgumentNullException(nameof(gameData));
         }
 
         return gameDate.currentLife <= 0;
     }
 
+    public bool IsClear(GameData gameData)
+    {
+        if (gameData == null)
+        {
+            // エラー処理
+            throw new ArgumentNullException(nameof(gameData));
+        }
+
+        return gameData.remainingTime <= 0f && gameData.currentLife > 0;
+    }
 }

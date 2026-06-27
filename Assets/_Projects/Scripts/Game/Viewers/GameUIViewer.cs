@@ -1,13 +1,31 @@
 using UnityEngine;
+using VContainer;
 
 public class GameUIViewer : MonoBehaviour
 {
-    [SerializeField] LifeViewer lifeViewer;
-    [SerializeField] TimerViewer timerViewer;
-    [SerializeField] ScoreViewer scoreViewer;
-    [SerializeField] DifficultyViewer difficultyViewer;
-    [SerializeField] ItemCountViewer itemCountViewer;
-    [SerializeField] GameData gameData;
+    private LifeViewer lifeViewer;
+    private TimerViewer timerViewer;
+    private ScoreViewer scoreViewer;
+    private DifficultyViewer difficultyViewer;
+    private ItemCountViewer itemCountViewer;
+    private GameData gameData;
+
+    [Inject]
+    public void Construct(
+        LifeViewer lifeViewer,
+        TimerViewer timerViewer,
+        ScoreViewer scoreViewer,
+        DifficultyViewer difficultyViewer,
+        ItemCountViewer itemCountViewer,
+        GameData gameData)
+    {
+        this.lifeViewer = lifeViewer;
+        this.timerViewer = timerViewer;
+        this.scoreViewer = scoreViewer;
+        this.difficultyViewer = difficultyViewer;
+        this.itemCountViewer = itemCountViewer;
+        this.gameData = gameData;
+    }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()

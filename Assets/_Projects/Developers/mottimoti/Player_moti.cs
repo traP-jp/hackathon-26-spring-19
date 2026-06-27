@@ -1,17 +1,14 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerController : MonoBehaviour
+public class Player_moti : MonoBehaviour
 {
+    [SerializeField] float _walkSpeed = 3f;
+    [SerializeField] float xDash = 2f;
     Rigidbody2D _rb;
-    [SerializeField] float moveSpeed  = 3f;
-    [SerializeField] float mulitdash = 2f;
     float _xInput;
     bool _isDash;
 
-    [SerializeField] float minX;
-    [SerializeField] float maxX;
-    [SerializeField]bool canMove;
 
     public void Start()
     {
@@ -20,21 +17,20 @@ public class PlayerController : MonoBehaviour
 
     public void Update()
     {
-        float xVelocity = _xInput * moveSpeed;
-
+        float xVelocity = _xInput * _walkSpeed;
         if (_isDash)
         {
-            xVelocity *= mulitdash;
+            xVelocity *= xDash;
         }
         _rb.linearVelocityX = xVelocity;
     }
 
-    public void Move(InputAction.CallbackContext context)
+    public void OnMove(InputAction.CallbackContext context)
     {
         _xInput = context.ReadValue<float>();
     }
 
-    public void Dash(InputAction.CallbackContext context)
+    public void OnDash(InputAction.CallbackContext context)
     {
         if (context.started)
         {
@@ -44,15 +40,5 @@ public class PlayerController : MonoBehaviour
         {
             _isDash = false;
         }
-    }
-
-    public void SetCanmove(bool canMove)
-    {
-        
-    }
-
-    public void ClampPosition()
-    {
-        
     }
 }

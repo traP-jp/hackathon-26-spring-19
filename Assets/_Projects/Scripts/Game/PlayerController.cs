@@ -1,28 +1,57 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] float moveSpeed;
+    Rigidbody2D _rb;
+    [SerializeField] float moveSpeed  = 3f;
+    [SerializeField] float mulitdash = 2f;
+    float _xInput;
+    bool _isDash;
+
     [SerializeField] float minX;
     [SerializeField] float maxX;
     [SerializeField]bool canMove;
 
-    void Update()
+    public void Start()
+    {
+        _rb = gameObject.GetComponent<Rigidbody2D>();
+    }
+
+    public void Update()
+    {
+        float xVelocity = _xInput * moveSpeed;
+
+        if (_isDash)
+        {
+            xVelocity *= mulitdash;
+        }
+        _rb.linearVelocityX = xVelocity;
+    }
+
+    public void Move(InputAction.CallbackContext context)
+    {
+        _xInput = context.ReadValue<float>();
+    }
+
+    public void Dash(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            _isDash = true;
+        }
+        else if (context.canceled)
+        {
+            _isDash = false;
+        }
+    }
+
+    public void SetCanmove(bool canMove)
     {
         
     }
 
-    void Move(float inputX)
-    {
-        
-    }
-
-    void SetCanmove(bool canMove)
-    {
-        
-    }
-
-    void ClampPosition()
+    public void ClampPosition()
     {
         
     }

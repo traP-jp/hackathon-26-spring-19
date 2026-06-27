@@ -11,6 +11,6 @@ public class mottimoti_test : MonoBehaviour
     } 
     void Update()
     {
-        difficultyViewer.SetDifficulty(text);
+        // difficultyViewer.SetDifficulty(text);
     }
 }

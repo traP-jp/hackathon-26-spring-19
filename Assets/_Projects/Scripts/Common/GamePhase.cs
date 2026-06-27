@@ -1,4 +1,4 @@
-enum GamePhase
+public enum GamePhase
 {
     Ready,
     Playing,

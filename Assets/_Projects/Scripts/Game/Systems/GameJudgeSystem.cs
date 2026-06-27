@@ -3,15 +3,15 @@ using System.Xml.XPath;
 
 public class GameJudgeSystem
 {
-    public bool IsGameOver(GameDate gameDate)
+    public bool IsGameOver(GameData gameData)
     {
-        if (gameDate == null)
+        if (gameData == null)
         {
             // エラー処理
             throw new ArgumentNullException(nameof(gameData));
         }
 
-        return gameDate.currentLife <= 0;
+        return gameData.currentLife <= 0;
     }
 
     public bool IsClear(GameData gameData)
@@ -44,7 +44,7 @@ public class GameJudgeSystem
             throw new ArgumentNullException(nameof(gameData));
         }
 
-        if (IsGameOver(gameOver))
+        if (IsGameOver(gameData))
         {
             return ResultType.GameOver;
         }
@@ -53,6 +53,10 @@ public class GameJudgeSystem
         {
             return ResultType.Clear;
         }
+
+        throw new InvalidOperationException(
+            "エラー：終了条件を満たしていない状態でJudgeResultが呼ばれた"
+        );
     }
 
     public void ApplyResult(GameData gameData, ResultType resultType)

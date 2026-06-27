@@ -7,7 +7,7 @@ public class LifeViewer : MonoBehaviour
     GameObject lifeIconPrefab;
     List<GameObject> spawnedIcons;
 
-    void SetLife(int currentLife, int maxLife) 
+    public void SetLife(int currentLife, int maxLife) 
     {
         
     }

@@ -5,7 +5,7 @@ public class DifficultyViewer : MonoBehaviour
 {
     TextMeshProUGUI difficultyText;
 
-    void SetDifficulty(DifficultyParam difficulty)
+    public void SetDifficulty(DifficultyParam difficulty)
     {
         
     }

@@ -17,7 +17,7 @@ public class ScoreViewer : MonoBehaviour
         
     }
 
-    void SetScore(int score){
-        scoreText.text = score;
+    public void SetScore(int score){
+        scoreText.text = score.ToString();
     }
 }

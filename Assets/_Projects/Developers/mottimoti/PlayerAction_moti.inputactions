@@ -1,0 +1,77 @@
+{
+    "version": 1,
+    "name": "PlayerAction_moti",
+    "maps": [
+        {
+            "name": "PlayerAction",
+            "id": "b7d6c576-4b1f-4e42-9eb3-ed8f61209cef",
+            "actions": [
+                {
+                    "name": "Move",
+                    "type": "Value",
+                    "id": "107254d4-5124-447b-992d-8979c3c7d1d2",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Dash",
+                    "type": "Button",
+                    "id": "1d86c06b-f609-40e6-8fb6-567163c5a518",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "1D Axis",
+                    "id": "0d420e8a-0b41-4b97-87a2-8aa3a83c2432",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "45cb0b41-3e59-43ad-8e35-d5345c7e13bc",
+                    "path": "<Keyboard>/leftArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "9ee2c2d3-9334-49d5-b804-5720c29ddfe5",
+                    "path": "<Keyboard>/rightArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "a32dcc7c-2907-4ad4-aec6-741fe278de7e",
+                    "path": "<Keyboard>/ctrl",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Dash",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

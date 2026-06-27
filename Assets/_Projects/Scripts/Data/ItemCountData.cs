@@ -1,8 +1,9 @@
-using UnityEngine;
+using System;
 
+[Serializable]
 public class ItemCountData
 {
-    private int alcoholCount;
-    private int healCount;
-    private int scoreItemCount;
+    public int alcoholCount;
+    public int healCount;
+    public int scoreItemCount;
 }

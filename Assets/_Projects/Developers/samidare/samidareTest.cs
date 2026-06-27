@@ -2,7 +2,7 @@ using UnityEngine;
 using TMPro;
 
 
-public class samidareTest : MonoBehaviour
+public class SamidareTest : MonoBehaviour
 {
     // テキスト操作の練習用
     [SerializeField] DifficultyViewer difficultyViewer;

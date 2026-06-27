@@ -27,25 +27,29 @@ public class GameUIViewer : MonoBehaviour
         this.gameData = gameData;
     }
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private void Start()
     {
-        
+        Refresh();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void LateUpdate()
     {
-        
+        Refresh();
     }
 
-    void Refresh(GameData gameData)
+    public void Refresh()
     {
-        lifeViewer.SetLife(gameData.currentLife, gameData.maxLife);
-        timerViewer.SetTime(gameData.remainingTime, gameData.timeLimit);
-        scoreViewer.SetScore(gameData.score);
-        difficultyViewer.SetDifficulty(gameData.difficulty);
-        itemCountViewer.SetItemCounts(gameData.itemCountData);
+        if (gameData != null) Refresh(gameData);
+    }
 
+    public void Refresh(GameData data)
+    {
+        if (data == null) return;
+
+        lifeViewer?.SetLife(data.currentLife, data.maxLife);
+        timerViewer?.SetTime(data.remainingTime, data.timeLimit);
+        scoreViewer?.SetScore(data.score);
+        difficultyViewer?.SetDifficulty(data.difficulty);
+        itemCountViewer?.SetItemCounts(data.itemCountData);
     }
 }

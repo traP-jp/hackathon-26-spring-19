@@ -1,3 +1,5 @@
+using System;
+using UnityEngine;
 using VContainer;
 using VContainer.Unity;
 
@@ -6,9 +8,20 @@ using VContainer.Unity;
 /// </summary>
 public sealed class TitleScope : LifetimeScope
 {
+    [SerializeField]
+    private TitleInfo titleInfo;
+
+    [SerializeField]
+    private TitleViewer titleViewer;
+
+    [SerializeField]
+    private DifficultyParam[] difficultyParams = Array.Empty<DifficultyParam>();
+
     protected override void Configure(IContainerBuilder builder)
     {
-        builder.RegisterComponentInHierarchy<TitleInfo>();
-        builder.RegisterComponentInHierarchy<TitelViewer>();
+        builder.RegisterComponent(titleInfo);
+        builder.RegisterComponent(titleViewer);
+        builder.RegisterInstance(difficultyParams);
+        builder.RegisterEntryPoint<TitlePresentator>();
     }
 }

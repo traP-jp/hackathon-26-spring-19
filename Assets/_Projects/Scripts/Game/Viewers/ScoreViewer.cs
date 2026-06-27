@@ -3,21 +3,10 @@ using UnityEngine;
 
 public class ScoreViewer : MonoBehaviour
 {
-    [SerializeField] TextMeshProUGUI scoreText;
+    [SerializeField] private TextMeshProUGUI scoreText;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public void SetScore(int score)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    public void SetScore(int score){
-        scoreText.text = score.ToString();
+        if (scoreText != null) scoreText.text = score.ToString();
     }
 }

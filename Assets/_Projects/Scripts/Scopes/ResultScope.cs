@@ -1,3 +1,4 @@
+using UnityEngine;
 using VContainer;
 using VContainer.Unity;
 
@@ -6,10 +7,16 @@ using VContainer.Unity;
 /// </summary>
 public sealed class ResultScope : LifetimeScope
 {
+    [SerializeField]
+    private ResultInfo resultInfo;
+
+    [SerializeField]
+    private ResultViewer resultViewer;
+
     protected override void Configure(IContainerBuilder builder)
     {
-        builder.RegisterComponentInHierarchy<ResultData>();
-        builder.RegisterComponentInHierarchy<ResultInfo>();
-        builder.RegisterComponentInHierarchy<ResultViewer>();
+        builder.RegisterComponent(resultInfo);
+        builder.RegisterComponent(resultViewer);
+        builder.RegisterEntryPoint<ResultPresentator>();
     }
 }

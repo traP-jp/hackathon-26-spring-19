@@ -6,16 +6,17 @@ public class ItemCountViewer : MonoBehaviour
     [SerializeField] private TextMeshProUGUI alcoholCountText;
     [SerializeField] private TextMeshProUGUI healCountText;
     [SerializeField] private TextMeshProUGUI scoreItemCountText;
-    public void SetCounts(int alcoholCount, int healCount, int scoreItemCount)
-    {
-        alcoholCountText.text = $"{alcoholCount}";
-        healCountText.text = $"{healCount}";
-        scoreItemCountText.text = $"{scoreItemCount}";
-    }
-    
-    void Start()
+
+    private void Awake()
     {
         SetCounts(0, 0, 0);
+    }
+
+    public void SetCounts(int alcoholCount, int healCount, int scoreItemCount)
+    {
+        SetText(alcoholCountText, alcoholCount);
+        SetText(healCountText, healCount);
+        SetText(scoreItemCountText, scoreItemCount);
     }
 
     public void SetItemCounts(ItemCountData itemCountData)
@@ -31,5 +32,10 @@ public class ItemCountViewer : MonoBehaviour
             itemCountData.healCount,
             itemCountData.scoreItemCount
         );
+    }
+
+    private static void SetText(TextMeshProUGUI target, int count)
+    {
+        if (target != null) target.text = Mathf.Max(0, count).ToString();
     }
 }

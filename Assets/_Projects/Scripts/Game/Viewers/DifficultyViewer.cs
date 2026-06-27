@@ -3,10 +3,13 @@ using TMPro;
 
 public class DifficultyViewer : MonoBehaviour
 {
-    [SerializeField] TextMeshProUGUI difficultyText;
+    [SerializeField] private TextMeshProUGUI difficultyText;
 
     public void SetDifficulty(DifficultyParam difficulty)
     {
-        difficultyText.text = difficulty.displayName;
+        if (difficultyText != null)
+        {
+            difficultyText.text = difficulty != null ? difficulty.displayName : string.Empty;
+        }
     }
 }

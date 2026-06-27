@@ -3,7 +3,7 @@ using TMPro;
 using R3;
 using VContainer;
 
-public class TitelViewer : MonoBehaviour
+public class TitleViewer : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI difficultyDescriptionText;
 

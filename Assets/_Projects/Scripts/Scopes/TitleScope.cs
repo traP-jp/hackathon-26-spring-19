@@ -9,6 +9,6 @@ public sealed class TitleScope : LifetimeScope
     protected override void Configure(IContainerBuilder builder)
     {
         builder.RegisterComponentInHierarchy<TitleInfo>();
-        builder.RegisterComponentInHierarchy<TitelViewer>();
+        builder.RegisterComponentInHierarchy<TitleViewer>();
     }
 }

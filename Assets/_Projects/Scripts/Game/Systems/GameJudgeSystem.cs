@@ -1,4 +1,5 @@
 using System;
+using System.Xml.XPath;
 
 public class GameJudgeSystem
 {
@@ -33,5 +34,24 @@ public class GameJudgeSystem
         }
 
         return IsGameOver(gameData) || IsClear(gameData);
+    }
+
+    public ResultType JudgeResult(GameData gameData)
+    {
+        if (gameData == null)
+        {
+            // エラー処理
+            throw new ArgumentNullException(nameof(gameData));
+        }
+
+        if (IsGameOver(gameOver))
+        {
+            return ResultType.GameOver;
+        }
+
+        if (IsClear(gameData))
+        {
+            return ResultType.Clear;
+        }
     }
 }

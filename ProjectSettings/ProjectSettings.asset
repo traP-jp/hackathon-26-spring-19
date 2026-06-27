@@ -4,11 +4,7 @@
 PlayerSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 29
-<<<<<<< HEAD
-  productGUID: 997512eedc25988499ed15028a6c9fcf
-=======
   productGUID: 0cb10b64d2b3d4297821453c6a24347a
->>>>>>> origin/main
   AndroidProfiler: 0
   AndroidFilterTouchesWhenObscured: 0
   AndroidEnableSustainedPerformanceMode: 0
@@ -17,11 +13,7 @@ PlayerSettings:
   useOnDemandResources: 0
   accelerometerFrequency: 60
   companyName: DefaultCompany
-<<<<<<< HEAD
-  productName: h26s_19
-=======
   productName: Hackathon26spring_19_Unity
->>>>>>> origin/main
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
@@ -306,7 +298,6 @@ PlayerSettings:
   AndroidReportGooglePlayAppDependencies: 1
   androidSymbolsSizeThreshold: 800
   m_BuildTargetIcons: []
-<<<<<<< HEAD
   m_BuildTargetPlatformIcons:
   - m_BuildTarget: Android
     m_Icons:
@@ -400,9 +391,6 @@ PlayerSettings:
       m_Height: 36
       m_Kind: 0
       m_SubKind: 
-=======
-  m_BuildTargetPlatformIcons: []
->>>>>>> origin/main
   m_BuildTargetBatching: []
   m_BuildTargetShaderSettings: []
   m_BuildTargetGraphicsJobs: []
@@ -623,11 +611,7 @@ PlayerSettings:
   ps4GarlicHeapSize: 2048
   ps4ProGarlicHeapSize: 2560
   playerPrefsMaxSize: 32768
-<<<<<<< HEAD
-  ps4Passcode: frAQBc8Wsa1xVPfvJcrgRYwTiizs2trQ
-=======
   ps4Passcode: Es7XzMK4QDvlbsQiXNmhuVjkfCPqbtDd
->>>>>>> origin/main
   ps4pnSessions: 1
   ps4pnPresence: 1
   ps4pnFriends: 1
@@ -695,7 +679,25 @@ PlayerSettings:
   webGLCloseOnQuit: 0
   webWasm2023: 0
   webEnableSubmoduleStrippingCompatibility: 0
-  scriptingDefineSymbols: {}
+  scriptingDefineSymbols:
+    Android: DOTWEEN;DOTWEEN_UITOOLKIT;DOTWEEN_EPO
+    EmbeddedLinux: DOTWEEN;DOTWEEN_UITOOLKIT;DOTWEEN_EPO
+    GameCoreScarlett: DOTWEEN;DOTWEEN_UITOOLKIT;DOTWEEN_EPO
+    GameCoreXboxOne: DOTWEEN;DOTWEEN_UITOOLKIT;DOTWEEN_EPO
+    Kepler: DOTWEEN;DOTWEEN_UITOOLKIT;DOTWEEN_EPO
+    LinuxHeadlessSimulation: DOTWEEN;DOTWEEN_UITOOLKIT;DOTWEEN_EPO
+    Nintendo Switch: DOTWEEN;DOTWEEN_UITOOLKIT;DOTWEEN_EPO
+    Nintendo Switch 2: DOTWEEN;DOTWEEN_UITOOLKIT;DOTWEEN_EPO
+    PS4: DOTWEEN;DOTWEEN_UITOOLKIT;DOTWEEN_EPO
+    PS5: DOTWEEN;DOTWEEN_UITOOLKIT;DOTWEEN_EPO
+    QNX: DOTWEEN;DOTWEEN_UITOOLKIT;DOTWEEN_EPO
+    Standalone: DOTWEEN;DOTWEEN_UITOOLKIT;DOTWEEN_EPO
+    VisionOS: DOTWEEN;DOTWEEN_UITOOLKIT;DOTWEEN_EPO
+    WebGL: DOTWEEN;DOTWEEN_UITOOLKIT;DOTWEEN_EPO
+    Windows Store Apps: DOTWEEN;DOTWEEN_UITOOLKIT;DOTWEEN_EPO
+    XboxOne: DOTWEEN;DOTWEEN_UITOOLKIT;DOTWEEN_EPO
+    iPhone: DOTWEEN;DOTWEEN_UITOOLKIT;DOTWEEN_EPO
+    tvOS: DOTWEEN;DOTWEEN_UITOOLKIT;DOTWEEN_EPO
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend:
@@ -717,22 +719,14 @@ PlayerSettings:
   editorAssembliesCompatibilityLevel: 1
   m_RenderingPath: 1
   m_MobileRenderingPath: 1
-<<<<<<< HEAD
-  metroPackageName: h26s_19
-=======
   metroPackageName: Hackathon26spring_19_Unity
->>>>>>> origin/main
   metroPackageVersion: 
   metroCertificatePath: 
   metroCertificatePassword: 
   metroCertificateSubject: 
   metroCertificateIssuer: 
   metroCertificateNotAfter: 0000000000000000
-<<<<<<< HEAD
-  metroApplicationDescription: h26s_19
-=======
   metroApplicationDescription: Hackathon26spring_19_Unity
->>>>>>> origin/main
   wsaImages: {}
   metroTileShortName: 
   metroTileShowName: 0
@@ -803,19 +797,11 @@ PlayerSettings:
   activeInputHandler: 1
   windowsGamepadBackendHint: 0
   enableDirectStorage: 0
-<<<<<<< HEAD
-  cloudProjectId: 38bfb697-3403-41fe-952f-4724db6b8e01
-  framebufferDepthMemorylessMode: 0
-  qualitySettingsNames: []
-  projectName: h26s_19 2026-06-27_01-37-35
-  organizationId: shun2048
-=======
   cloudProjectId: 
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
   projectName: 
   organizationId: 
->>>>>>> origin/main
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   hmiLoadingImage: {fileID: 0}

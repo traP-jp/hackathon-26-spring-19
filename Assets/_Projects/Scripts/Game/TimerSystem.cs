@@ -11,7 +11,7 @@ public class TimerSystem
         gameData.remainingTime -= deltaTime;
         gameData.elapsedTime += deltaTime;
         if(gameData.remainingTime < 0f){
-            gameData.remainingtime = 0f;
+            gameData.remainingTime = 0f;
         }
     } 
     

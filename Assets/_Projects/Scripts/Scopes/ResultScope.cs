@@ -10,6 +10,7 @@ public sealed class ResultScope : LifetimeScope
     {
         builder.RegisterComponentInHierarchy<ResultData>();
         builder.RegisterComponentInHierarchy<ResultInfo>();
+        builder.RegisterComponentInHierarchy<ItemCountViewer>();
         builder.RegisterComponentInHierarchy<ResultViewer>();
     }
 }

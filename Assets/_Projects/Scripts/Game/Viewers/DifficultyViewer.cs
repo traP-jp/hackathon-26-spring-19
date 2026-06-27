@@ -7,6 +7,6 @@ public class DifficultyViewer : MonoBehaviour
 
     public void SetDifficulty(DifficultyParam difficulty)
     {
-        difficultyText.text = difficulty.ToString();
+        difficultyText.text = difficulty.displayName;
     }
 }

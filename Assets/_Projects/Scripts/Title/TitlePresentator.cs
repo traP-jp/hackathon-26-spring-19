@@ -1,5 +1,6 @@
 using System;
 using R3;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 using VContainer.Unity;
 
@@ -37,6 +38,10 @@ public sealed class TitlePresentator : IStartable, IDisposable
             .Subscribe(_ => StartGame())
             .AddTo(disposables);
 
+        titleInfo.OnExitClicked
+            .Subscribe(_ => ExitGame())
+            .AddTo(disposables);
+
         SetDifficulty(titleInfo.GetSelectedDifficulty());
     }
 
@@ -68,6 +73,15 @@ public sealed class TitlePresentator : IStartable, IDisposable
     {
         gameSessionData.selectedDifficulty = selectedDifficulty;
         SceneManager.LoadScene(GameSceneName);
+    }
+
+    private static void ExitGame()
+    {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+        Application.Quit();
+#endif
     }
 
     public void Dispose()

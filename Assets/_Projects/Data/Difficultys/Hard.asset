@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 873f6c3373f5f8c4db130841552b1a13, type: 3}
   m_Name: Hard
   m_EditorClassIdentifier: Assembly-CSharp::DifficultyParam
-  difficultyType: 0
-  displayName: 
-  description: 
-  timeLimit: 0
-  spawnInterval: 0
-  baseFallSpeed: 0
-  alcoholRate: 0
-  healRate: 0
-  scoreRate: 0
+  difficultyType: 2
+  displayName: HARD
+  description: TIME 120 SEC   /   MORE ITEMS   /   FAST
+  timeLimit: 120
+  spawnInterval: 0.6
+  baseFallSpeed: 5.5
+  alcoholRate: 0.3
+  healRate: 0.1
+  scoreRate: 0.6

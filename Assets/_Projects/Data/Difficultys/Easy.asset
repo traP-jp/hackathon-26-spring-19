@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: Easy
   m_EditorClassIdentifier: Assembly-CSharp::DifficultyParam
   difficultyType: 0
-  displayName: 
-  description: 
-  timeLimit: 0
-  spawnInterval: 0
-  baseFallSpeed: 0
-  alcoholRate: 0
-  healRate: 0
-  scoreRate: 0
+  displayName: EASY
+  description: TIME 60 SEC   /   FEWER ITEMS   /   SLOW
+  timeLimit: 60
+  spawnInterval: 1.2
+  baseFallSpeed: 3
+  alcoholRate: 0.1
+  healRate: 0.1
+  scoreRate: 0.8

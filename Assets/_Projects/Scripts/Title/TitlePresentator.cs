@@ -72,6 +72,7 @@ public sealed class TitlePresentator : IStartable, IDisposable
     private void StartGame()
     {
         gameSessionData.selectedDifficulty = selectedDifficulty;
+        gameSessionData.ClearResult();
         SceneManager.LoadScene(GameSceneName);
     }
 

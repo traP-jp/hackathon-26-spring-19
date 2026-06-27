@@ -1,5 +1,4 @@
 using System;
-using System.Xml.XPath;
 
 public class GameJudgeSystem
 {
@@ -80,5 +79,18 @@ public class GameJudgeSystem
         {
             gameData.currentLife = 0;
         }
+    }
+
+    public ResultType CompleteGame(GameData gameData, GameSessionData gameSessionData)
+    {
+        if (gameSessionData == null)
+        {
+            throw new ArgumentNullException(nameof(gameSessionData));
+        }
+
+        ResultType resultType = JudgeResult(gameData);
+        ApplyResult(gameData, resultType);
+        gameSessionData.SaveResult(gameData);
+        return resultType;
     }
 }

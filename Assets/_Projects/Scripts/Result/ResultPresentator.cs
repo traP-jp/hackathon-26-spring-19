@@ -26,12 +26,19 @@ public sealed class ResultPresentator : IStartable, IDisposable
     public void Start()
     {
         resultInfo.OnRetryClicked
-            .Subscribe(_ => SceneManager.LoadScene(GameSceneName))
+            .Subscribe(_ => Retry())
             .AddTo(disposables);
 
         resultInfo.OnTitleClicked
             .Subscribe(_ => SceneManager.LoadScene(TitleSceneName))
             .AddTo(disposables);
+
+        if (gameSessionData.lastResult == null)
+        {
+            UnityEngine.Debug.LogWarning(
+                "ResultData が保存されていません。ゲーム終了時に GameSessionData.SaveResult を呼んでください。"
+            );
+        }
 
         resultViewer.Show(gameSessionData.lastResult);
     }
@@ -39,5 +46,11 @@ public sealed class ResultPresentator : IStartable, IDisposable
     public void Dispose()
     {
         disposables.Dispose();
+    }
+
+    private void Retry()
+    {
+        gameSessionData.ClearResult();
+        SceneManager.LoadScene(GameSceneName);
     }
 }

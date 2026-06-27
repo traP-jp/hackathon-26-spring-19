@@ -1,6 +1,7 @@
-using UnityEngine;
+using System;
 
-public class ResultData : MonoBehaviour
+[Serializable]
+public sealed class ResultData
 {
     public ResultType resultType;
     public DifficultyType difficultyType;

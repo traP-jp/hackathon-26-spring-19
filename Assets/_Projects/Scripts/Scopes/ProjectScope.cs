@@ -18,6 +18,7 @@ public sealed class ProjectScope : LifetimeScope
 
     protected override void Configure(IContainerBuilder builder)
     {
+        builder.Register<GameSessionData>(Lifetime.Singleton);
         builder.RegisterInstance(difficultyParams);
         builder.RegisterInstance(itemParams);
 

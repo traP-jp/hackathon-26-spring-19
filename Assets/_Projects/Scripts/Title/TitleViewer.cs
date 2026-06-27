@@ -1,5 +1,5 @@
-using UnityEngine;
 using TMPro;
+using UnityEngine;
 
 public class TitleViewer : MonoBehaviour
 {
@@ -10,7 +10,7 @@ public class TitleViewer : MonoBehaviour
     {
         if (difficultyDescriptionText == null)
         {
-            Debug.LogWarning("difficultyDescriptionText が設定されていません");
+            Debug.LogWarning("difficultyDescriptionText が設定されていません", this);
             return;
         }
 

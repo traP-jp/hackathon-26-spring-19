@@ -1,4 +1,5 @@
-enum ItemType {
+public enum ItemType
+{
     Alcohol,
     Heal,
     Score

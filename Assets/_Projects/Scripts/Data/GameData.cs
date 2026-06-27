@@ -4,13 +4,13 @@ using UnityEngine;
 public class GameData : MonoBehaviour
 {
     GamePhase phase;
-    DifficultyParam difficulty;
-    float timeLimit;
-    float remainingTime;
-    float elapsedTime;
-    int maxLife;
-    int currentLife;
-    int score;
-    ResultType resultType;
-    ItemCountData itemCountData;
+    private DifficultyParam difficulty;
+    private float timeLimit;
+    private float remainingTime;
+    private float elapsedTime;
+    private int maxLife;
+    private int currentLife;
+    private int score;
+    private ResultType resultType;
+    private ItemCountData itemCountData;
 }

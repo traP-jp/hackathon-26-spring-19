@@ -25,6 +25,7 @@ public sealed class GameMainPresentator : IStartable, ITickable, IDisposable
     private readonly TimerSystem timerSystem;
     private readonly ItemEffectSystem itemEffectSystem;
     private readonly GameJudgeSystem gameJudgeSystem;
+    private readonly SoundPlayer soundPlayer;
     private readonly CompositeDisposable disposables = new();
 
     private bool isFinished;
@@ -43,7 +44,8 @@ public sealed class GameMainPresentator : IStartable, ITickable, IDisposable
         GameResultViewer gameResultViewer,
         TimerSystem timerSystem,
         ItemEffectSystem itemEffectSystem,
-        GameJudgeSystem gameJudgeSystem)
+        GameJudgeSystem gameJudgeSystem,
+        SoundPlayer soundPlayer)
     {
         this.gameData = gameData;
         this.gameSessionData = gameSessionData;
@@ -58,6 +60,7 @@ public sealed class GameMainPresentator : IStartable, ITickable, IDisposable
         this.timerSystem = timerSystem;
         this.itemEffectSystem = itemEffectSystem;
         this.gameJudgeSystem = gameJudgeSystem;
+        this.soundPlayer = soundPlayer;
     }
 
     //本編を開始
@@ -135,23 +138,23 @@ public sealed class GameMainPresentator : IStartable, ITickable, IDisposable
             .AddTo(disposables);
 
         pauseInfo.OnPauseClicked
-            .Subscribe(_ => PauseGame())
+            .Subscribe(_ => OnPauseClicked())
             .AddTo(disposables);
 
         pauseInfo.OnResumeClicked
-            .Subscribe(_ => ResumeGame())
+            .Subscribe(_ => OnResumeClicked())
             .AddTo(disposables);
 
         pauseInfo.OnTitleClicked
-            .Subscribe(_ => GoToTitleScene())
+            .Subscribe(_ => OnTitleClicked())
             .AddTo(disposables);
 
         gameResultInfo.OnRestartClicked
-            .Subscribe(_ => RestartGame())
+            .Subscribe(_ => OnRestartClicked())
             .AddTo(disposables);
 
         gameResultInfo.OnTitleClicked
-            .Subscribe(_ => GoToTitleScene())
+            .Subscribe(_ => OnTitleClicked())
             .AddTo(disposables);
     }
 
@@ -183,14 +186,17 @@ public sealed class GameMainPresentator : IStartable, ITickable, IDisposable
     {
         if (effectResult.isDamage)
         {
+            soundPlayer.PlayDamage();
             Debug.Log("Damage item collected.");
         }
         else if (effectResult.isLifeRecovered)
         {
+            soundPlayer.PlayHeal();
             Debug.Log("Heal item collected.");
         }
-        else if (effectResult.isScoreAdded)
+        else
         {
+            soundPlayer.PlayItemGet();
             Debug.Log("Score item collected.");
         }
     }
@@ -215,11 +221,24 @@ public sealed class GameMainPresentator : IStartable, ITickable, IDisposable
         Time.timeScale = 1f;
 
         gameJudgeSystem.ApplyResult(gameData, resultType);
+        PlayResultSound(resultType);
         gameSessionData.SaveResult(gameData);
         RefreshUI();
         pauseInfo.SetPauseButtonInteractable(false);
         pauseInfo.SetMenuButtonsInteractable(false);
         gameResultViewer.Show(resultType);
+    }
+
+    //結果に応じた音を鳴らす
+    private void PlayResultSound(ResultType resultType)
+    {
+        if (resultType == ResultType.Clear)
+        {
+            soundPlayer.PlayClear();
+            return;
+        }
+
+        soundPlayer.PlayGameOver();
     }
 
     //結果データを作成
@@ -296,6 +315,34 @@ public sealed class GameMainPresentator : IStartable, ITickable, IDisposable
         itemSpawner.StopSpawn();
         playerController.SetCanmove(false);
         SceneManager.LoadScene(TitleSceneName);
+    }
+
+    //一時停止ボタンを処理
+    private void OnPauseClicked()
+    {
+        soundPlayer.PlayButton();
+        PauseGame();
+    }
+
+    //再開ボタンを処理
+    private void OnResumeClicked()
+    {
+        soundPlayer.PlayButton();
+        ResumeGame();
+    }
+
+    //リスタートボタンを処理
+    private void OnRestartClicked()
+    {
+        soundPlayer.PlayButton();
+        RestartGame();
+    }
+
+    //タイトルボタンを処理
+    private void OnTitleClicked()
+    {
+        soundPlayer.PlayButton();
+        GoToTitleScene();
     }
 
     //UIを更新

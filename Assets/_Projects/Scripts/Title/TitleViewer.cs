@@ -5,6 +5,7 @@ public class TitleViewer : MonoBehaviour
 {
     [SerializeField]
     private TextMeshProUGUI difficultyDescriptionText;
+    [SerializeField] private TextMeshProUGUI difficultyDescriptionText_shade;
 
     public void SetDifficulty(DifficultyParam difficulty)
     {
@@ -15,6 +16,9 @@ public class TitleViewer : MonoBehaviour
         }
 
         difficultyDescriptionText.text = difficulty != null
+            ? difficulty.description
+            : string.Empty;
+        difficultyDescriptionText_shade.text = difficulty != null
             ? difficulty.description
             : string.Empty;
     }

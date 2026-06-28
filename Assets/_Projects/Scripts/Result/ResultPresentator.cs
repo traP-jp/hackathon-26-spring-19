@@ -11,26 +11,29 @@ public sealed class ResultPresentator : IStartable, IDisposable
     private readonly ResultInfo resultInfo;
     private readonly ResultViewer resultViewer;
     private readonly GameSessionData gameSessionData;
+    private readonly SoundPlayer soundPlayer;
     private readonly CompositeDisposable disposables = new();
 
     public ResultPresentator(
         ResultInfo resultInfo,
         ResultViewer resultViewer,
-        GameSessionData gameSessionData)
+        GameSessionData gameSessionData,
+        SoundPlayer soundPlayer)
     {
         this.resultInfo = resultInfo;
         this.resultViewer = resultViewer;
         this.gameSessionData = gameSessionData;
+        this.soundPlayer = soundPlayer;
     }
 
     public void Start()
     {
         resultInfo.OnRetryClicked
-            .Subscribe(_ => Retry())
+            .Subscribe(_ => OnRetryClicked())
             .AddTo(disposables);
 
         resultInfo.OnTitleClicked
-            .Subscribe(_ => SceneManager.LoadScene(TitleSceneName))
+            .Subscribe(_ => OnTitleClicked())
             .AddTo(disposables);
 
         if (gameSessionData.lastResult == null)
@@ -51,5 +54,19 @@ public sealed class ResultPresentator : IStartable, IDisposable
     {
         gameSessionData.ClearResult();
         SceneManager.LoadScene(GameSceneName);
+    }
+
+    //リトライボタンを処理
+    private void OnRetryClicked()
+    {
+        soundPlayer.PlayButton();
+        Retry();
+    }
+
+    //タイトルボタンを処理
+    private void OnTitleClicked()
+    {
+        soundPlayer.PlayButton();
+        SceneManager.LoadScene(TitleSceneName);
     }
 }

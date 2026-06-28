@@ -21,6 +21,7 @@ public sealed class ProjectScope : LifetimeScope
         builder.Register<GameSessionData>(Lifetime.Singleton);
         builder.RegisterInstance(difficultyParams);
         builder.RegisterInstance(itemParams);
+        builder.RegisterInstance(new SoundPlayer(soundParam));
 
         if (soundParam != null)
         {

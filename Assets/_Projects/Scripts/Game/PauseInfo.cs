@@ -1,33 +1,32 @@
+using R3;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class PauseInfo : MonoBehaviour
+public class PauseInfoSub : MonoBehaviour
 {
-    [SerializeField]public Button pauseButton;
-    [SerializeField]public Button resumeButton;
-    [SerializeField]public Button titleButton;
+    [SerializeField] private Button pauseButton;
+    [SerializeField] private Button resumeButton;
+    [SerializeField] private Button titleButton;
 
-    public Observable<Unit> OnPauseClicked
-    public Observable<Unit> OnResumeClicked
-    public Observable<Unit> OnTitleClicked
+    public Observable<Unit> OnPauseClicked { get; private set; }
+    public Observable<Unit> OnResumeClicked { get; private set; }
+    public Observable<Unit> OnTitleClicked { get; private set; }
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Awake()
+    private void Awake()
     {
         OnPauseClicked = pauseButton.OnClickAsObservable();
         OnResumeClicked = resumeButton.OnClickAsObservable();
         OnTitleClicked = titleButton.OnClickAsObservable();
     }
 
-    // Update is called once per frame
-    void SetPauseButtonInteractable(bool interactable)
+    public void SetPauseButtonInteractable(bool interactable)
     {
         pauseButton.interactable = interactable;
     }
 
-    void SetMenuButtonsInteractable(bool interactable)
+    public void SetMenuButtonsInteractable(bool interactable)
     {
         resumeButton.interactable = interactable;
         titleButton.interactable = interactable;
     }
-
 }

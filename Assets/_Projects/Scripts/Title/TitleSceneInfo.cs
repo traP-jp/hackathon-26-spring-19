@@ -39,6 +39,8 @@ public class TitleSceneInfo : MonoBehaviour
         if (easyToggle.isOn)   return DifficultyType.Easy;
         if (normalToggle.isOn) return DifficultyType.Normal;
         if (hardToggle.isOn)   return DifficultyType.Hard;
+
+        return DifficultyType.Normal;
     }
 
     public void SetInteractable(bool interactable)

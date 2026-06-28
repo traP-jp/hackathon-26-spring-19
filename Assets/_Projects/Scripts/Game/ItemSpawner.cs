@@ -131,6 +131,9 @@ public class ItemSpawner : MonoBehaviour, IDisposable
         float fallSpeed = CalculateFallSpeed(itemParam);
 
         item.Initialize(itemParam, fallSpeed, destroyY);
+#if UNITY_EDITOR
+        Debug.Log($"Spawned item: {itemParam.id} ({itemParam.itemType})", this);
+#endif
         activeItems.Add(item);
         hasSpawnedItem = true;
         RegisterItemEvents(item);

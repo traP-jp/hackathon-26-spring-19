@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c87c3be48aac98047ad7bcd78d36c4a3, type: 3}
   m_Name: Cucunber
   m_EditorClassIdentifier: Assembly-CSharp::ItemParam
-  id: 
-  displayName: Jokki
-  itemType: 0
-  sprite: {fileID: 0}
-  scoreValue: 0
-  maxLifeHealScoreValue: 0
+  id: cucumber
+  displayName: Cucumber
+  itemType: 1
+  sprite: {fileID: 8670987568269538427, guid: f8ffd85d3bde3ef4f8fc5d6481d64f81, type: 3}
+  scoreValue: 100
+  maxLifeHealScoreValue: 150
   lifeDelta: 1
   speedMultiplier: 1

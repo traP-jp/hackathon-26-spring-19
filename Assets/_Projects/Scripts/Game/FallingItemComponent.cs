@@ -5,6 +5,7 @@ using UnityEngine;
 public class FallingItemComponent : MonoBehaviour, IDisposable
 {
     [SerializeField] private SpriteRenderer spriteRenderer;
+    [SerializeField] private Collider2D hitbox;
 
     private readonly Subject<FallingItemComponent> collectedSubject = new();
     private readonly Subject<FallingItemComponent> outOfScreenSubject = new();
@@ -25,6 +26,11 @@ public class FallingItemComponent : MonoBehaviour, IDisposable
         if (spriteRenderer == null)
         {
             spriteRenderer = GetComponent<SpriteRenderer>();
+        }
+
+        if (hitbox == null)
+        {
+            hitbox = GetComponent<Collider2D>();
         }
     }
 
@@ -97,6 +103,25 @@ public class FallingItemComponent : MonoBehaviour, IDisposable
         if (spriteRenderer != null)
         {
             spriteRenderer.sprite = itemParam.sprite;
+            FitHitboxToSprite(itemParam.sprite);
+        }
+    }
+
+    private void FitHitboxToSprite(Sprite sprite)
+    {
+        if (hitbox == null || sprite == null) return;
+
+        Bounds bounds = sprite.bounds;
+
+        if (hitbox is BoxCollider2D box)
+        {
+            box.offset = bounds.center;
+            box.size = bounds.size;
+        }
+        else if (hitbox is CircleCollider2D circle)
+        {
+            circle.offset = bounds.center;
+            circle.radius = Mathf.Min(bounds.extents.x, bounds.extents.y) * 0.85f;
         }
     }
 

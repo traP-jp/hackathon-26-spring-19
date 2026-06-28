@@ -5,7 +5,7 @@ using VContainer.Unity;
 
 public sealed class ResultPresentator : IStartable, IDisposable
 {
-    private const string GameSceneName = "GameScene";
+    private const string GameSceneName = "GameScene_moti";
     private const string TitleSceneName = "TitleScene";
 
     private readonly ResultInfo resultInfo;

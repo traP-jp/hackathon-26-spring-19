@@ -15,7 +15,7 @@ MonoBehaviour:
   difficultyType: 1
   displayName: NORMAL
   description: "\u6642\u9593 : 90\u79D2 / \u30A2\u30A4\u30C6\u30E0\u91CF : \u3075\u3064\u3046
-    / \u30B9\u30D4\u30FC\u30C9 : \u3075\u3064\u3046"
+    / \u843D\u4E0B\u901F\u5EA6 : \u3075\u3064\u3046"
   timeLimit: 90
   spawnInterval: 0.9
   baseFallSpeed: 4

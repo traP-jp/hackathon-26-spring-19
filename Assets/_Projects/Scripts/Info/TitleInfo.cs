@@ -33,7 +33,6 @@ public sealed class TitleInfo : MonoBehaviour
     private void Awake()
     {
         OnStartClicked = startButton.OnClickAsObservable();
-        OnExitClicked = exitButton.OnClickAsObservable();
 
         BindDifficultyToggle(easyToggle, DifficultyType.Easy);
         BindDifficultyToggle(normalToggle, DifficultyType.Normal);

@@ -1,6 +1,7 @@
 using R3;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections.Generic;
 
 public class Pauselnfo : MonoBehaviour
 {

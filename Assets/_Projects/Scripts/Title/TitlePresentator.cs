@@ -41,10 +41,6 @@ public sealed class TitlePresentator : IStartable, IDisposable
             .Subscribe(_ => OnStartClicked())
             .AddTo(disposables);
 
-        titleInfo.OnExitClicked
-            .Subscribe(_ => OnExitClicked())
-            .AddTo(disposables);
-
         SetDifficulty(titleInfo.GetSelectedDifficulty());
     }
 

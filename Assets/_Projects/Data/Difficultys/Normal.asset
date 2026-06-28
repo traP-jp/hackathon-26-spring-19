@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DifficultyParam
   difficultyType: 1
   displayName: NORMAL
-  description: "\u6642\u9593 : 90\u79D2 / \u30A2\u30A4\u30C6\u30E0\u91CF : \u3075\u3064\u3046
+  description: "\u6642\u9593 : 30\u79D2 / \u30A2\u30A4\u30C6\u30E0\u91CF : \u3075\u3064\u3046
     / \u843D\u4E0B\u901F\u5EA6 : \u3075\u3064\u3046"
-  timeLimit: 90
-  spawnInterval: 0.9
+  timeLimit: 30
+  spawnInterval: 0.8
   baseFallSpeed: 4
   alcoholRate: 0.2
   healRate: 0.1

@@ -27,7 +27,6 @@ public sealed class TitleInfo : MonoBehaviour
     private readonly CompositeDisposable disposables = new();
 
     public Observable<Unit> OnStartClicked { get; private set; }
-    public Observable<Unit> OnExitClicked { get; private set; }
     public Observable<DifficultyType> OnDifficultyChanged => difficultyChangedSubject;
 
     private void Awake()

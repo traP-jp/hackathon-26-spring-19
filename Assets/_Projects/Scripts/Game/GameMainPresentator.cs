@@ -7,7 +7,7 @@ using VContainer.Unity;
 
 public sealed class GameMainPresentator : IStartable, ITickable, IDisposable
 {
-    private const string ResultSceneName = "ResultScene";
+    private const string GameSceneName = "GameScene_moti";
     private const string TitleSceneName = "TitleScene";
     //初期ライフを固定値で持つため
     private const int InitialLife = 3;
@@ -19,6 +19,8 @@ public sealed class GameMainPresentator : IStartable, ITickable, IDisposable
     private readonly PlayerController playerController;
     private readonly GameUIViewer gameUIViewer;
     private readonly PauseInfo pauseInfo;
+    private readonly GameResultInfo gameResultInfo;
+    private readonly GameResultViewer gameResultViewer;
     private readonly TimerSystem timerSystem;
     private readonly ItemEffectSystem itemEffectSystem;
     private readonly GameJudgeSystem gameJudgeSystem;
@@ -35,6 +37,8 @@ public sealed class GameMainPresentator : IStartable, ITickable, IDisposable
         PlayerController playerController,
         GameUIViewer gameUIViewer,
         PauseInfo pauseInfo,
+        GameResultInfo gameResultInfo,
+        GameResultViewer gameResultViewer,
         TimerSystem timerSystem,
         ItemEffectSystem itemEffectSystem,
         GameJudgeSystem gameJudgeSystem)
@@ -46,6 +50,8 @@ public sealed class GameMainPresentator : IStartable, ITickable, IDisposable
         this.playerController = playerController;
         this.gameUIViewer = gameUIViewer;
         this.pauseInfo = pauseInfo;
+        this.gameResultInfo = gameResultInfo;
+        this.gameResultViewer = gameResultViewer;
         this.timerSystem = timerSystem;
         this.itemEffectSystem = itemEffectSystem;
         this.gameJudgeSystem = gameJudgeSystem;
@@ -57,6 +63,7 @@ public sealed class GameMainPresentator : IStartable, ITickable, IDisposable
         InitializeGameData();
         InitializeComponents();
         BindEvents();
+        gameResultViewer.Hide();
         RefreshUI();
 
         gameData.phase = GamePhase.Playing;
@@ -134,6 +141,14 @@ public sealed class GameMainPresentator : IStartable, ITickable, IDisposable
         pauseInfo.OnTitleClicked
             .Subscribe(_ => GoToTitleScene())
             .AddTo(disposables);
+
+        gameResultInfo.OnRestartClicked
+            .Subscribe(_ => RestartGame())
+            .AddTo(disposables);
+
+        gameResultInfo.OnTitleClicked
+            .Subscribe(_ => GoToTitleScene())
+            .AddTo(disposables);
     }
 
     //進行中を更新
@@ -198,7 +213,9 @@ public sealed class GameMainPresentator : IStartable, ITickable, IDisposable
         gameJudgeSystem.ApplyResult(gameData, resultType);
         gameSessionData.SaveResult(gameData);
         RefreshUI();
-        GoToResultScene();
+        pauseInfo.SetPauseButtonInteractable(false);
+        pauseInfo.SetMenuButtonsInteractable(false);
+        gameResultViewer.Show(resultType);
     }
 
     //結果データを作成
@@ -227,9 +244,11 @@ public sealed class GameMainPresentator : IStartable, ITickable, IDisposable
     }
 
     //リザルトへ遷移
-    private void GoToResultScene()
+    private void RestartGame()
     {
-        SceneManager.LoadScene(ResultSceneName);
+        Time.timeScale = 1f;
+        gameSessionData.ClearResult();
+        SceneManager.LoadScene(GameSceneName);
     }
 
     //一時停止する

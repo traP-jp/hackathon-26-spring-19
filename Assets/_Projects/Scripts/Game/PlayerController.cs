@@ -20,6 +20,17 @@ public class PlayerController : MonoBehaviour
 
     public void Update()
     {
+        if (_rb == null)
+        {
+            return;
+        }
+
+        if (!canMove)
+        {
+            _rb.linearVelocityX = 0f;
+            return;
+        }
+
         float xVelocity = _xInput * moveSpeed;
         if (_isDash)
         {
@@ -27,9 +38,7 @@ public class PlayerController : MonoBehaviour
         }
         _rb.linearVelocityX = xVelocity;
 
-        var p = _rb.position;
-        p.x = Mathf.Clamp(p.x, minX, maxX);
-        _rb.position = p;
+        ClampPosition();
     }
 
     public void Move(InputAction.CallbackContext context)
@@ -51,11 +60,23 @@ public class PlayerController : MonoBehaviour
 
     public void SetCanmove(bool canMove)
     {
-        
+        this.canMove = canMove;
+
+        if (!canMove && _rb != null)
+        {
+            _rb.linearVelocityX = 0f;
+        }
     }
 
     public void ClampPosition()
     {
-        
+        if (_rb == null)
+        {
+            return;
+        }
+
+        Vector2 position = _rb.position;
+        position.x = Mathf.Clamp(position.x, minX, maxX);
+        _rb.position = position;
     }
 }

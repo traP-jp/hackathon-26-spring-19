@@ -12,6 +12,7 @@ public sealed class TitlePresentator : IStartable, IDisposable
     private readonly TitleViewer titleViewer;
     private readonly GameSessionData gameSessionData;
     private readonly DifficultyParam[] difficultyParams;
+    private readonly SoundPlayer soundPlayer;
     private readonly CompositeDisposable disposables = new();
 
     private DifficultyType selectedDifficulty;
@@ -20,29 +21,52 @@ public sealed class TitlePresentator : IStartable, IDisposable
         TitleInfo titleInfo,
         TitleViewer titleViewer,
         GameSessionData gameSessionData,
-        DifficultyParam[] difficultyParams)
+        DifficultyParam[] difficultyParams,
+        SoundPlayer soundPlayer)
     {
         this.titleInfo = titleInfo;
         this.titleViewer = titleViewer;
         this.gameSessionData = gameSessionData;
         this.difficultyParams = difficultyParams;
+        this.soundPlayer = soundPlayer;
     }
 
     public void Start()
     {
         titleInfo.OnDifficultyChanged
-            .Subscribe(SetDifficulty)
+            .Subscribe(OnDifficultyChanged)
             .AddTo(disposables);
 
         titleInfo.OnStartClicked
-            .Subscribe(_ => StartGame())
+            .Subscribe(_ => OnStartClicked())
             .AddTo(disposables);
 
         titleInfo.OnExitClicked
-            .Subscribe(_ => ExitGame())
+            .Subscribe(_ => OnExitClicked())
             .AddTo(disposables);
 
         SetDifficulty(titleInfo.GetSelectedDifficulty());
+    }
+
+    //難易度選択を処理
+    private void OnDifficultyChanged(DifficultyType difficultyType)
+    {
+        soundPlayer.PlayButton();
+        SetDifficulty(difficultyType);
+    }
+
+    //スタートボタンを処理
+    private void OnStartClicked()
+    {
+        soundPlayer.PlayButton();
+        StartGame();
+    }
+
+    //終了ボタンを処理
+    private void OnExitClicked()
+    {
+        soundPlayer.PlayButton();
+        ExitGame();
     }
 
     private void SetDifficulty(DifficultyType difficultyType)

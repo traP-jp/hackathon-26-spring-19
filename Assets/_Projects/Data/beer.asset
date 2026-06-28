@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c87c3be48aac98047ad7bcd78d36c4a3, type: 3}
   m_Name: beer
   m_EditorClassIdentifier: Assembly-CSharp::ItemParam
-  id: beer
+  id: Beer
   displayName: beer
   itemType: 0
   sprite: {fileID: 6779204642115704726, guid: e6c8b92fb184758449e91f2db638d039, type: 3}

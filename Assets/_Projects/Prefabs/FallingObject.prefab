@@ -108,6 +108,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FallingItemComponent
   spriteRenderer: {fileID: 8613971987095885657}
   hitbox: {fileID: 4261016342814022955}
+  targetWorldHeight: 1
 --- !u!58 &4261016342814022955
 CircleCollider2D:
   m_ObjectHideFlags: 0

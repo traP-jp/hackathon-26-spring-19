@@ -5,6 +5,7 @@ using UnityEngine;
 public class FallingItemComponent : MonoBehaviour, IDisposable
 {
     [SerializeField] private SpriteRenderer spriteRenderer;
+    [SerializeField] private Collider2D hitbox;
 
     private readonly Subject<FallingItemComponent> collectedSubject = new();
     private readonly Subject<FallingItemComponent> outOfScreenSubject = new();
@@ -26,11 +27,21 @@ public class FallingItemComponent : MonoBehaviour, IDisposable
         {
             spriteRenderer = GetComponent<SpriteRenderer>();
         }
+
+        if (hitbox == null)
+        {
+            hitbox = GetComponent<Collider2D>();
+        }
     }
 
     //落下情報を初期化
     public void Initialize(ItemParam itemParam, float fallSpeed, float destroyY)
     {
+        if (itemParam == null)
+        {
+            throw new ArgumentNullException(nameof(itemParam));
+        }
+
         this.itemParam = itemParam;
         this.fallSpeed = fallSpeed;
         this.destroyY = destroyY;
@@ -89,7 +100,29 @@ public class FallingItemComponent : MonoBehaviour, IDisposable
     //見た目を反映
     private void SetView(ItemParam itemParam)
     {
-        spriteRenderer.sprite = itemParam.sprite;
+        if (spriteRenderer != null)
+        {
+            spriteRenderer.sprite = itemParam.sprite;
+            FitHitboxToSprite(itemParam.sprite);
+        }
+    }
+
+    private void FitHitboxToSprite(Sprite sprite)
+    {
+        if (hitbox == null || sprite == null) return;
+
+        Bounds bounds = sprite.bounds;
+
+        if (hitbox is BoxCollider2D box)
+        {
+            box.offset = bounds.center;
+            box.size = bounds.size;
+        }
+        else if (hitbox is CircleCollider2D circle)
+        {
+            circle.offset = bounds.center;
+            circle.radius = Mathf.Min(bounds.extents.x, bounds.extents.y) * 0.85f;
+        }
     }
 
     //通知を破棄

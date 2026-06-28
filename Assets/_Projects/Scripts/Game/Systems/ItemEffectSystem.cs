@@ -66,9 +66,7 @@ public class ItemEffectSystem
     public void ApplyAlcoholEffect(GameData gameData, ItemParam itemParam)
     {
         // ダメージ量を取得
-        int damageValue = itemParam.lifeDelta;
-
-        gameData.currentLife -= damageValue;
+        gameData.currentLife += Math.Min(0, itemParam.lifeDelta);
     }
 
     // 回復アイテム取得時の処理。ライフ +1、スコア +100。

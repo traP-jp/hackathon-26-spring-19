@@ -23,19 +23,19 @@ public sealed class PauseInfo : MonoBehaviour
 
     private void Awake()
     {
-        OnPauseClicked = pauseButton.OnClickAsObservable();
-        OnResumeClicked = resumeButton.OnClickAsObservable();
-        OnTitleClicked = titleButton.OnClickAsObservable();
+        OnPauseClicked = pauseButton != null ? pauseButton.OnClickAsObservable() : Observable.Empty<Unit>();
+        OnResumeClicked = resumeButton != null ? resumeButton.OnClickAsObservable() : Observable.Empty<Unit>();
+        OnTitleClicked = titleButton != null ? titleButton.OnClickAsObservable() : Observable.Empty<Unit>();
     }
 
     public void SetPauseButtonInteractable(bool interactable)
     {
-        pauseButton.interactable = interactable;
+        if (pauseButton != null) pauseButton.interactable = interactable;
     }
 
     public void SetMenuButtonsInteractable(bool interactable)
     {
-        resumeButton.interactable = interactable;
-        titleButton.interactable = interactable;
+        if (resumeButton != null) resumeButton.interactable = interactable;
+        if (titleButton != null) titleButton.interactable = interactable;
     }
 }

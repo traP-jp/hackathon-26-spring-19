@@ -1,16 +1,16 @@
 using UnityEngine;
 
-public class NewMonoBehaviourScript : MonoBehaviour
+public sealed class PauseViewer : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    [SerializeField] private GameObject pausePanel;
+
+    public void Show()
     {
-        
+        if (pausePanel != null) pausePanel.SetActive(true);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Hide()
     {
-        
+        if (pausePanel != null) pausePanel.SetActive(false);
     }
 }

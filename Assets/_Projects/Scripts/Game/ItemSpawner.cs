@@ -33,6 +33,7 @@ public class ItemSpawner : MonoBehaviour, IDisposable
     private DifficultyParam difficulty;
     private float spawnTimer;
     private bool isSpawning;
+    private bool hasSpawnedItem;
     //二重破棄を防ぐため
     private bool disposed;
 
@@ -41,9 +42,15 @@ public class ItemSpawner : MonoBehaviour, IDisposable
     //難易度で初期化
     public void Initialize(DifficultyParam difficulty)
     {
+        if (difficulty == null)
+        {
+            throw new ArgumentNullException(nameof(difficulty));
+        }
+
         this.difficulty = difficulty;
         spawnTimer = 0f;
         isSpawning = false;
+        hasSpawnedItem = false;
 
         ClearAllItems();
     }
@@ -62,7 +69,24 @@ public class ItemSpawner : MonoBehaviour, IDisposable
     //生成開始
     public void StartSpawn()
     {
+        if (difficulty == null)
+        {
+            Debug.LogError("ItemSpawner is not initialized.", this);
+            return;
+        }
+
+        if (!HasAnyValidItem())
+        {
+            Debug.LogError("No valid ItemParam is assigned to ItemSpawner.", this);
+            return;
+        }
+
         isSpawning = true;
+
+        if (!hasSpawnedItem)
+        {
+            SpawnItem();
+        }
     }
 
     //生成停止
@@ -88,6 +112,13 @@ public class ItemSpawner : MonoBehaviour, IDisposable
     //アイテム生成
     public void SpawnItem()
     {
+        if (itemPrefab == null)
+        {
+            Debug.LogError("FallingItem prefab is not assigned.", this);
+            StopSpawn();
+            return;
+        }
+
         ItemParam itemParam = ChooseItem();
 
         if (itemParam == null)
@@ -101,15 +132,16 @@ public class ItemSpawner : MonoBehaviour, IDisposable
 
         item.Initialize(itemParam, fallSpeed, destroyY);
         activeItems.Add(item);
+        hasSpawnedItem = true;
         RegisterItemEvents(item);
     }
 
     //割合で選択
     public ItemParam ChooseItem()
     {
-        float alcoholRate = Mathf.Max(0f, difficulty.alcoholRate);
-        float healRate = Mathf.Max(0f, difficulty.healRate);
-        float scoreRate = Mathf.Max(0f, difficulty.scoreRate);
+        float alcoholRate = CountValidItems(alcoholItems) > 0 ? Mathf.Max(0f, difficulty.alcoholRate) : 0f;
+        float healRate = CountValidItems(healItems) > 0 ? Mathf.Max(0f, difficulty.healRate) : 0f;
+        float scoreRate = CountValidItems(scoreItems) > 0 ? Mathf.Max(0f, difficulty.scoreRate) : 0f;
         float totalRate = alcoholRate + healRate + scoreRate;
 
         if (totalRate <= 0f)
@@ -135,13 +167,21 @@ public class ItemSpawner : MonoBehaviour, IDisposable
     //リストから抽選
     public ItemParam ChooseRandomItem(List<ItemParam> items)
     {
-        if (items.Count == 0)
+        int validCount = CountValidItems(items);
+        if (validCount == 0)
         {
             return null;
         }
 
-        int index = UnityEngine.Random.Range(0, items.Count);
-        return items[index];
+        int targetIndex = UnityEngine.Random.Range(0, validCount);
+        foreach (ItemParam item in items)
+        {
+            if (item == null) continue;
+            if (targetIndex == 0) return item;
+            targetIndex--;
+        }
+
+        return null;
     }
 
     //空なら全体抽選
@@ -160,7 +200,10 @@ public class ItemSpawner : MonoBehaviour, IDisposable
     //全カテゴリ抽選
     private ItemParam ChooseRandomItemFromAll()
     {
-        int totalCount = alcoholItems.Count + healItems.Count + scoreItems.Count;
+        int alcoholCount = CountValidItems(alcoholItems);
+        int healCount = CountValidItems(healItems);
+        int scoreCount = CountValidItems(scoreItems);
+        int totalCount = alcoholCount + healCount + scoreCount;
 
         if (totalCount == 0)
         {
@@ -169,20 +212,20 @@ public class ItemSpawner : MonoBehaviour, IDisposable
 
         int index = UnityEngine.Random.Range(0, totalCount);
 
-        if (index < alcoholItems.Count)
+        if (index < alcoholCount)
         {
-            return alcoholItems[index];
+            return GetValidItemAt(alcoholItems, index);
         }
 
-        index -= alcoholItems.Count;
+        index -= alcoholCount;
 
-        if (index < healItems.Count)
+        if (index < healCount)
         {
-            return healItems[index];
+            return GetValidItemAt(healItems, index);
         }
 
-        index -= healItems.Count;
-        return scoreItems[index];
+        index -= healCount;
+        return GetValidItemAt(scoreItems, index);
     }
 
     //生成位置を決定
@@ -245,6 +288,11 @@ public class ItemSpawner : MonoBehaviour, IDisposable
     //アイテム削除
     public void DestroyItem(FallingItemComponent item)
     {
+        if (item == null)
+        {
+            return;
+        }
+
         if (itemDisposables.TryGetValue(item, out CompositeDisposable disposable))
         {
             disposable.Dispose();
@@ -285,5 +333,48 @@ public class ItemSpawner : MonoBehaviour, IDisposable
     private void OnDestroy()
     {
         Dispose();
+    }
+
+    private bool HasAnyValidItem()
+    {
+        return CountValidItems(alcoholItems) +
+               CountValidItems(healItems) +
+               CountValidItems(scoreItems) > 0;
+    }
+
+    private static int CountValidItems(List<ItemParam> items)
+    {
+        if (items == null) return 0;
+
+        int count = 0;
+        foreach (ItemParam item in items)
+        {
+            if (item != null) count++;
+        }
+        return count;
+    }
+
+    private static ItemParam GetValidItemAt(List<ItemParam> items, int targetIndex)
+    {
+        if (items == null || targetIndex < 0) return null;
+
+        foreach (ItemParam item in items)
+        {
+            if (item == null) continue;
+            if (targetIndex == 0) return item;
+            targetIndex--;
+        }
+        return null;
+    }
+
+    private void OnValidate()
+    {
+        if (minSpawnX > maxSpawnX)
+        {
+            (minSpawnX, maxSpawnX) = (maxSpawnX, minSpawnX);
+        }
+
+        randomSpeedMin = Mathf.Max(0.01f, randomSpeedMin);
+        randomSpeedMax = Mathf.Max(0.01f, randomSpeedMax);
     }
 }

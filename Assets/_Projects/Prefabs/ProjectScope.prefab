@@ -53,4 +53,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 2e8d14dc33c17e847be8f8164e9d6bfd, type: 2}
   - {fileID: 11400000, guid: 97034ca893dc3ed4f9507ae31acb9353, type: 2}
   itemParams: []
-  soundParam: {fileID: 0}
+  soundParam: {fileID: 11400000, guid: fc56c93b7ab634bcc9e29409b213d492, type: 2}

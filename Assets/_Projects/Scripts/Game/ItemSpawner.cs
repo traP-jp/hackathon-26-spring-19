@@ -39,6 +39,22 @@ public class ItemSpawner : MonoBehaviour, IDisposable
 
     public Observable<ItemParam> OnItemCollected => itemCollectedSubject;
 
+    public IEnumerable<ItemParam> GetConfiguredItems()
+    {
+        HashSet<string> yieldedIds = new(StringComparer.OrdinalIgnoreCase);
+
+        foreach (List<ItemParam> category in new[] { alcoholItems, healItems, scoreItems })
+        {
+            if (category == null) continue;
+
+            foreach (ItemParam item in category)
+            {
+                if (item == null || string.IsNullOrWhiteSpace(item.id)) continue;
+                if (yieldedIds.Add(item.id)) yield return item;
+            }
+        }
+    }
+
     //難易度で初期化
     public void Initialize(DifficultyParam difficulty)
     {
@@ -131,6 +147,9 @@ public class ItemSpawner : MonoBehaviour, IDisposable
         float fallSpeed = CalculateFallSpeed(itemParam);
 
         item.Initialize(itemParam, fallSpeed, destroyY);
+#if UNITY_EDITOR
+        Debug.Log($"Spawned item: {itemParam.id} ({itemParam.itemType})", this);
+#endif
         activeItems.Add(item);
         hasSpawnedItem = true;
         RegisterItemEvents(item);

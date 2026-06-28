@@ -11,7 +11,7 @@ public class ItemEffectSystem
         int beforeLife = gameData.currentLife;
         int beforeScore = gameData.score;
 
-        AddItemCount(gameData, itemParam.itemType);
+        AddItemCount(gameData, itemParam);
 
         switch (itemParam.itemType)
         {
@@ -76,7 +76,7 @@ public class ItemEffectSystem
         bool isLifeMax = gameData.currentLife >= gameData.maxLife;
 
         int addedScore = CalculateAddedScore(gameData, itemParam);
-        gameData.score += addedScore;
+        AddScore(gameData, addedScore);
 
         if (isLifeMax)
         {
@@ -93,35 +93,14 @@ public class ItemEffectSystem
     public void ApplyScoreEffect(GameData gameData, ItemParam itemParam)
     {
         int addedScore = CalculateAddedScore(gameData, itemParam);
-        gameData.score += addedScore;
+        AddScore(gameData, addedScore);
     }
 
     // 取得したアイテムの分類に応じて取得数を加算する。
-    public void AddItemCount(GameData gameData, ItemType itemType)
+    public void AddItemCount(GameData gameData, ItemParam itemParam)
     {
         EnsureItemCountData(gameData);
-
-        switch (itemType)
-        {
-            case ItemType.Alcohol:
-                gameData.itemCountData.alcoholCount++;
-                break;
-
-            case ItemType.Heal:
-                gameData.itemCountData.healCount++;
-                break;
-
-            case ItemType.Score:
-                gameData.itemCountData.scoreItemCount++;
-                break;
-
-            default:
-                throw new ArgumentOutOfRangeException(
-                    nameof(itemType),
-                    itemType,
-                    "未対応のItemType。"
-                );
-        }
+        gameData.itemCountData.Increment(itemParam);
     }
 
     // アイテム取得時に加算するスコアを計算する。
@@ -186,5 +165,11 @@ public class ItemEffectSystem
         {
             gameData.itemCountData = new ItemCountData();
         }
+    }
+
+    private static void AddScore(GameData gameData, int amount)
+    {
+        long nextScore = (long)Math.Max(0, gameData.score) + Math.Max(0, amount);
+        gameData.score = (int)Math.Min(int.MaxValue, nextScore);
     }
 }

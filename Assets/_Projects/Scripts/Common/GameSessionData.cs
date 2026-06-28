@@ -35,11 +35,6 @@ public sealed class GameSessionData
             return new ItemCountData();
         }
 
-        return new ItemCountData
-        {
-            alcoholCount = System.Math.Max(0, source.alcoholCount),
-            healCount = System.Math.Max(0, source.healCount),
-            scoreItemCount = System.Math.Max(0, source.scoreItemCount)
-        };
+        return source.Clone();
     }
 }

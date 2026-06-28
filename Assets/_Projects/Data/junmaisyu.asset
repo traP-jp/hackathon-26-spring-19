@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c87c3be48aac98047ad7bcd78d36c4a3, type: 3}
   m_Name: junmaisyu
   m_EditorClassIdentifier: Assembly-CSharp::ItemParam
-  id: jokki
-  displayName: Jokki
+  id: junmaisyu
+  displayName: junmaisyu
   itemType: 0
   sprite: {fileID: -2888558367755707695, guid: 94dd9efb0296b7b45af6b82812a2e0d4, type: 3}
   scoreValue: 0

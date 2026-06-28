@@ -6,6 +6,7 @@ public class FallingItemComponent : MonoBehaviour, IDisposable
 {
     [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private Collider2D hitbox;
+    [SerializeField, Min(0.01f)] private float targetWorldHeight = 1f;
 
     private readonly Subject<FallingItemComponent> collectedSubject = new();
     private readonly Subject<FallingItemComponent> outOfScreenSubject = new();
@@ -103,8 +104,17 @@ public class FallingItemComponent : MonoBehaviour, IDisposable
         if (spriteRenderer != null)
         {
             spriteRenderer.sprite = itemParam.sprite;
+            FitVisualSizeToSprite(itemParam.sprite);
             FitHitboxToSprite(itemParam.sprite);
         }
+    }
+
+    private void FitVisualSizeToSprite(Sprite sprite)
+    {
+        if (sprite == null || sprite.bounds.size.y <= 0f) return;
+
+        float uniformScale = targetWorldHeight / sprite.bounds.size.y;
+        transform.localScale = new Vector3(uniformScale, uniformScale, 1f);
     }
 
     private void FitHitboxToSprite(Sprite sprite)

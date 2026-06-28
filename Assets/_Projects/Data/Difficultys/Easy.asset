@@ -15,7 +15,7 @@ MonoBehaviour:
   difficultyType: 0
   displayName: EASY
   description: "\u6642\u9593 : 60\u79D2 / \u30A2\u30A4\u30C6\u30E0\u91CF : \u5C11\u306A\u3081
-    / \u30B9\u30D4\u30FC\u30C9 : \u3086\u3063\u304F\u308A"
+    / \u843D\u4E0B\u901F\u5EA6 : \u3086\u3063\u304F\u308A"
   timeLimit: 60
   spawnInterval: 1.2
   baseFallSpeed: 3

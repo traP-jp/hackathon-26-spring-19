@@ -41,6 +41,11 @@ public class ItemSpawner : MonoBehaviour, IDisposable
     //難易度で初期化
     public void Initialize(DifficultyParam difficulty)
     {
+        if (difficulty == null)
+        {
+            throw new ArgumentNullException(nameof(difficulty));
+        }
+
         this.difficulty = difficulty;
         spawnTimer = 0f;
         isSpawning = false;
@@ -62,6 +67,12 @@ public class ItemSpawner : MonoBehaviour, IDisposable
     //生成開始
     public void StartSpawn()
     {
+        if (difficulty == null)
+        {
+            Debug.LogError("ItemSpawner is not initialized.", this);
+            return;
+        }
+
         isSpawning = true;
     }
 
@@ -88,6 +99,13 @@ public class ItemSpawner : MonoBehaviour, IDisposable
     //アイテム生成
     public void SpawnItem()
     {
+        if (itemPrefab == null)
+        {
+            Debug.LogError("FallingItem prefab is not assigned.", this);
+            StopSpawn();
+            return;
+        }
+
         ItemParam itemParam = ChooseItem();
 
         if (itemParam == null)

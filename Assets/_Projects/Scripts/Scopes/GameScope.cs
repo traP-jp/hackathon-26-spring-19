@@ -12,6 +12,7 @@ public sealed class GameScope : LifetimeScope
         builder.RegisterComponentInHierarchy<PauseInfo>();
         builder.RegisterComponentInHierarchy<GameResultInfo>();
         builder.RegisterComponentInHierarchy<GameResultViewer>();
+        builder.RegisterComponentInHierarchy<PauseViewer>();
         builder.RegisterComponentInHierarchy<ItemSpawner>();
         builder.RegisterComponentInHierarchy<PlayerController>();
 

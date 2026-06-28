@@ -11,11 +11,19 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] float minX;
     [SerializeField] float maxX;
-    [SerializeField]bool canMove;
+    [SerializeField] bool canMove = true;
+
+    private void Awake()
+    {
+        _rb = GetComponent<Rigidbody2D>();
+    }
 
     public void Start()
     {
-        _rb = gameObject.GetComponent<Rigidbody2D>();
+        if (_rb == null)
+        {
+            _rb = GetComponent<Rigidbody2D>();
+        }
     }
 
     public void Update()

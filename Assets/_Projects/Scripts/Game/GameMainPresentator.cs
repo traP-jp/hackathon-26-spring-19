@@ -19,6 +19,7 @@ public sealed class GameMainPresentator : IStartable, ITickable, IDisposable
     private readonly PlayerController playerController;
     private readonly GameUIViewer gameUIViewer;
     private readonly PauseInfo pauseInfo;
+    private readonly PauseViewer pauseViewer;
     private readonly GameResultInfo gameResultInfo;
     private readonly GameResultViewer gameResultViewer;
     private readonly TimerSystem timerSystem;
@@ -37,6 +38,7 @@ public sealed class GameMainPresentator : IStartable, ITickable, IDisposable
         PlayerController playerController,
         GameUIViewer gameUIViewer,
         PauseInfo pauseInfo,
+        PauseViewer pauseViewer,
         GameResultInfo gameResultInfo,
         GameResultViewer gameResultViewer,
         TimerSystem timerSystem,
@@ -50,6 +52,7 @@ public sealed class GameMainPresentator : IStartable, ITickable, IDisposable
         this.playerController = playerController;
         this.gameUIViewer = gameUIViewer;
         this.pauseInfo = pauseInfo;
+        this.pauseViewer = pauseViewer;
         this.gameResultInfo = gameResultInfo;
         this.gameResultViewer = gameResultViewer;
         this.timerSystem = timerSystem;
@@ -63,6 +66,7 @@ public sealed class GameMainPresentator : IStartable, ITickable, IDisposable
         InitializeGameData();
         InitializeComponents();
         BindEvents();
+        pauseViewer.Hide();
         gameResultViewer.Hide();
         RefreshUI();
 
@@ -264,6 +268,7 @@ public sealed class GameMainPresentator : IStartable, ITickable, IDisposable
         playerController.SetCanmove(false);
         pauseInfo.SetPauseButtonInteractable(false);
         pauseInfo.SetMenuButtonsInteractable(true);
+        pauseViewer.Show();
         Time.timeScale = 0f;
     }
 
@@ -281,6 +286,7 @@ public sealed class GameMainPresentator : IStartable, ITickable, IDisposable
         playerController.SetCanmove(true);
         pauseInfo.SetPauseButtonInteractable(true);
         pauseInfo.SetMenuButtonsInteractable(false);
+        pauseViewer.Hide();
     }
 
     //タイトルへ戻る

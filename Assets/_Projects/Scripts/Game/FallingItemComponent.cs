@@ -31,6 +31,11 @@ public class FallingItemComponent : MonoBehaviour, IDisposable
     //落下情報を初期化
     public void Initialize(ItemParam itemParam, float fallSpeed, float destroyY)
     {
+        if (itemParam == null)
+        {
+            throw new ArgumentNullException(nameof(itemParam));
+        }
+
         this.itemParam = itemParam;
         this.fallSpeed = fallSpeed;
         this.destroyY = destroyY;
@@ -89,7 +94,10 @@ public class FallingItemComponent : MonoBehaviour, IDisposable
     //見た目を反映
     private void SetView(ItemParam itemParam)
     {
-        spriteRenderer.sprite = itemParam.sprite;
+        if (spriteRenderer != null)
+        {
+            spriteRenderer.sprite = itemParam.sprite;
+        }
     }
 
     //通知を破棄

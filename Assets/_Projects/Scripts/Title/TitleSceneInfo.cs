@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using R3;
 using Unity.Collections.LowLevel.Unsafe;
 
-public class TitleInfo : MonoBehaviour
+public class TitleSceneInfo : MonoBehaviour
 {
     public Button startButton;
     public Button exitButton;

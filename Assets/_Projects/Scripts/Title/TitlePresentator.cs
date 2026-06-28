@@ -6,7 +6,7 @@ using VContainer.Unity;
 
 public sealed class TitlePresentator : IStartable, IDisposable
 {
-    private const string GameSceneName = "GameScene";
+    private const string GameSceneName = "GameScene_moti";
 
     private readonly TitleInfo titleInfo;
     private readonly TitleViewer titleViewer;

@@ -1,2 +1,20 @@
 fileFormatVersion: 2
 guid: cae9e98964cfe7c45ab4bf7a39d2e4e3
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - titleBgm: {instanceID: 0}
+  - gameBgm: {instanceID: 0}
+  - resultBgm: {instanceID: 0}
+  - damageSe: {fileID: 8300000, guid: a8a40877cc38044ccbb42c3b4b34c6d3, type: 3}
+  - healSe: {fileID: 8300000, guid: 4726160dc28d242b5963526a2d6fd355, type: 3}
+  - itemGetSe: {fileID: 8300000, guid: 74b3dc35cf5b84b4498f1098a45f8b0e, type: 3}
+  - clearSe: {fileID: 8300000, guid: 5c5b50209edfd4fccae36527e5a871f3, type: 3}
+  - gameOverSe: {fileID: 8300000, guid: 1326becc10fd1453f994adb9be2ba7a5, type: 3}
+  - buttonSe: {fileID: 8300000, guid: bd809c1d871874ae1afa467b28e8f417, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

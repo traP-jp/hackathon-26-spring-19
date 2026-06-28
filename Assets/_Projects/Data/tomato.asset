@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c87c3be48aac98047ad7bcd78d36c4a3, type: 3}
   m_Name: tomato
   m_EditorClassIdentifier: Assembly-CSharp::ItemParam
-  id: sasami
-  displayName: sasami
+  id: tomato
+  displayName: tomato
   itemType: 2
   sprite: {fileID: 881289563670249124, guid: 2cfec777a6d388447989fe33ea104153, type: 3}
   scoreValue: 100

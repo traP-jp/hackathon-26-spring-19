@@ -1,37 +1,39 @@
+using System;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
 public class ItemCountViewer : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI alcoholCountText;
-    [SerializeField] private TextMeshProUGUI healCountText;
-    [SerializeField] private TextMeshProUGUI scoreItemCountText;
-
-    private void Awake()
+    [Serializable]
+    public sealed class ItemCountTextBinding
     {
-        SetCounts(0, 0, 0);
+        public string itemId;
+        public TextMeshProUGUI countText;
     }
 
-    public void SetCounts(int alcoholCount, int healCount, int scoreItemCount)
-    {
-        SetText(alcoholCountText, alcoholCount);
-        SetText(healCountText, healCount);
-        SetText(scoreItemCountText, scoreItemCount);
-    }
+    [Header("Item ID Counts")]
+    [SerializeField] private List<ItemCountTextBinding> itemCountTexts = new();
+
+    [Header("Subtotals")]
+    [SerializeField] private TextMeshProUGUI alcoholSubtotalText;
+    [SerializeField] private TextMeshProUGUI foodSubtotalText;
 
     public void SetItemCounts(ItemCountData itemCountData)
     {
-        if (itemCountData == null)
+        itemCountData ??= new ItemCountData();
+
+        foreach (ItemCountTextBinding binding in itemCountTexts)
         {
-            SetCounts(0, 0, 0);
-            return;
+            if (binding?.countText == null || string.IsNullOrWhiteSpace(binding.itemId)) continue;
+            binding.countText.text = itemCountData.GetCount(binding.itemId).ToString();
         }
 
-        SetCounts(
-            itemCountData.alcoholCount,
-            itemCountData.healCount,
-            itemCountData.scoreItemCount
-        );
+        SetText(alcoholSubtotalText, itemCountData.GetSubtotal(ItemType.Alcohol));
+
+        int foodSubtotal = itemCountData.GetSubtotal(ItemType.Heal) +
+                           itemCountData.GetSubtotal(ItemType.Score);
+        SetText(foodSubtotalText, foodSubtotal);
     }
 
     private static void SetText(TextMeshProUGUI target, int count)

@@ -101,6 +101,7 @@ public sealed class GameMainPresentator : IStartable, ITickable, IDisposable
         gameData.score = 0;
         gameData.resultType = ResultType.GameOver;
         gameData.itemCountData = new ItemCountData();
+        gameData.itemCountData.InitializeCatalog(itemSpawner.GetConfiguredItems());
         isFinished = false;
     }
 
@@ -239,12 +240,7 @@ public sealed class GameMainPresentator : IStartable, ITickable, IDisposable
     //取得数を複製
     private ItemCountData CopyItemCountData(ItemCountData itemCountData)
     {
-        return new ItemCountData
-        {
-            alcoholCount = Mathf.Max(0, itemCountData.alcoholCount),
-            healCount = Mathf.Max(0, itemCountData.healCount),
-            scoreItemCount = Mathf.Max(0, itemCountData.scoreItemCount)
-        };
+        return itemCountData?.Clone() ?? new ItemCountData();
     }
 
     //リザルトへ遷移

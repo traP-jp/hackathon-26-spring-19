@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c87c3be48aac98047ad7bcd78d36c4a3, type: 3}
   m_Name: Edamame
   m_EditorClassIdentifier: Assembly-CSharp::ItemParam
-  id: Edamame
+  id: edamame
   displayName: Edamame
   itemType: 2
   sprite: {fileID: -4101562087389812714, guid: 201a70d2698bb6a43a9904375779d010, type: 3}

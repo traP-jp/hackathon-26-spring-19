@@ -2,7 +2,7 @@ using R3;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PauseInfoSub : MonoBehaviour
+public class GamePauseInfo : MonoBehaviour
 {
     [SerializeField] private Button pauseButton;
     [SerializeField] private Button resumeButton;

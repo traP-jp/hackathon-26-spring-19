@@ -39,7 +39,6 @@ public sealed class ResultPresentator : IStartable, IDisposable
                 "ResultData が保存されていません。ゲーム終了時に GameSessionData.SaveResult を呼んでください。"
             );
         }
-
         resultViewer.Show(gameSessionData.lastResult);
     }
 
